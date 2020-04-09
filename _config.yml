@@ -1,5 +1,5 @@
-title: BY Blog
-SEOTitle: blog of LWB
+title: Blog of LWB
+SEOTitle: Blog of LWB
 header-img: img/post-bg-desk.jpg
 email: osmium18452@gmail.com
 description: "No comment"
@@ -11,7 +11,7 @@ github_repo: "https://github.com/osmium18452/osmium18452.github.io.git" # you co
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
 sidebar-about-description: "CS student in NWPU Shannxi Xi'an P.R. China"
-sidebar-avatar: /img/avatar.png     # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-avatar: /img/avatar_m.jpg     # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
