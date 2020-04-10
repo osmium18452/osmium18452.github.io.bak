@@ -15,9 +15,9 @@ tags:
 前几天实在受不了了，上网上查了两天才弄明白。
 这里记一下，免得以后再去找。
 
-#HTTP/HTTPS 代理
+# HTTP/HTTPS 代理
 
-##配置
+## 配置
 
 `git config --global http.proxy 'http://127.0.0.1:1080`
 
@@ -35,7 +35,7 @@ tags:
 
 `git config --global --unset https.proxy`
 
-#SSH 代理
+# SSH 代理
 
 一开始在网上看到是 `ProxyCommand nc -v -x 127.0.0.1:1080 %h %p`, 但是这么配置了以后就提示没有nc这个指令，上网一查发现nc是Linux的一个用
 来做代理（？）的程序，于是乎只能另找。
@@ -44,9 +44,15 @@ tags:
 总而言之步骤如下：
 
 1.  在 C:\users\username\.ssh下面建一个config文件。
+
 2.  在config里面写上一行：`ProxyCommand "C:\Program Files\Git\mingw64\bin\connect.exe" -S 127.0.0.1:1080 %h %p`
+
 3.  这时候再去拉repo的时候会发现他会让你输密码，如果你的socks代理没密码的话就直接回车。
     但是这有个蛋疼的问题就是他每次都会让你输密码，而且在git bash里面还会提示密码错误，如果不想麻烦，就直接去环境变量里面是一个socks5的密码变量：
     
     ![socks5 password environment variable](/img/git-proxy/socks-password.png)
+    
+    如图，变量名就叫 `SOCKS5_PASSWD`，密码如果是空的话就随便填一个。
+
+4.  重启命令行，读入环境变量，然后找个比较大的repo（比图node的仓库`git clone git@github.com:nodejs/node.git`）测试一下, 完全ojbk。
     
