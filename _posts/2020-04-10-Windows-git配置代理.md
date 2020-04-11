@@ -7,7 +7,6 @@ author:     "lwb"
 header-img: "img/post-bg-desk.jpg"
 tags:
     - git
-    - tech
     - proxy
 ---
 
