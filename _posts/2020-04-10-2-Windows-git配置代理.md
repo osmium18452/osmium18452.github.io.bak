@@ -8,6 +8,7 @@ header-img: "img/post-bg-desk.jpg"
 tags:
     - git
     - proxy
+    - 日常总结
 ---
 
 给 git 设置代理这事从接触 GitHub 开始就一直在折腾，但是就是死活配不上，那23KB/s的下载速度实在是蛋疼，但是又不是不能用就一直懒得没细研究，直到
