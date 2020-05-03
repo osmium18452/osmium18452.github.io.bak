@@ -14,7 +14,7 @@ tags:
 
 ## 经典折线图
 
-```
+```python
 plt.figure()
 x=range(len(a))
 # plt.axis('scaled')
@@ -35,7 +35,7 @@ plt.show()
 
 ## 两个y轴的折线图
 
-```
+```python
 plt.figure()
 ax1 = plt.subplot()
 plt.title("loss and accuracy of training and validating")
