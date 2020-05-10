@@ -56,3 +56,13 @@ tags:
 
 4.  重启命令行，读入环境变量，然后找个比较大的repo（比图node的仓库`git clone git@github.com:nodejs/node.git`）测试一下, 完全ojbk。
     
+# P.S.
+
+今天ssr的1080端口不知道为什么被占用了，换了个端口以后git push的时候一直提醒我 failed to connect socks5://127.0.0.1:1080，用
+`git config --global https.proxy 'socks5://127.0.0.1:1088'` 改端口后还是不行，一直都在connect 1080。
+后来去.gitconfig里一看，竟然有个
+```
+[http "https://github.com"]
+	proxy = socks5://127.0.0.1:1080
+```
+一口老血，把这里改成1088就连上了。
