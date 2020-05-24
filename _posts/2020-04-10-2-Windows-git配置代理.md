@@ -64,11 +64,14 @@ Anyway, here're the steps:
     
 # P.S.
 
-今天ssr的1080端口不知道为什么被占用了，换了个端口以后git push的时候一直提醒我 failed to connect socks5://127.0.0.1:1080，用
-`git config --global https.proxy 'socks5://127.0.0.1:1088'` 改端口后还是不行，一直都在connect 1080。
-后来去.gitconfig里一看，竟然有个
+Today when i restarted the laptop ssr alerted me that port 1080 had been occupied so i changed the listening port to 1088
+but when i was pushing commits git alerted that it failed to connect socks5://127.0.0.1:1080. 
+Then i used `git config --global https.proxy 'socks5://127.0.0.1:1088'` to change the port but it didn't work.
+Later when i opened .gitconfig i found this:
+
 ```
 [http "https://github.com"]
 	proxy = socks5://127.0.0.1:1080
 ```
-一口老血，把这里改成1088就连上了。
+
+Change the port here to 1088 then it works.
