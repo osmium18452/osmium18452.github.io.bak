@@ -8,53 +8,59 @@ header-img: "img/post-bg-desk.jpg"
 tags:
     - git
     - proxy
-    - 日常总结
 ---
 
-给 git 设置代理这事从接触 GitHub 开始就一直在折腾，但是就是死活配不上，那23KB/s的下载速度实在是蛋疼，但是又不是不能用就一直懒得没细研究，直到
-前几天实在受不了了，上网上查了两天才弄明白。
-这里记一下，免得以后再去找。
+Due to China's GFW it's a problem to pull repos from and push commits to github, especially when you need to pull a very
+large repo from it.
+10~30 Kb/s bandwidth recalled me the time when I was in kindergarten around 2004, a time that most videos could olny be 
+played in 360p.
+Therefore, a proxy is critical for you to use the github in China.
 
-# HTTP/HTTPS 代理
+There're two way to pull/push repos/commits from/to github: HTTPS and SSH.
+Here we'll introduce both. 
 
-## 配置
+# HTTP/HTTPS Proxy
+
+## Enable
 
 `git config --global http.proxy 'http://127.0.0.1:1080'`
 
 `git config --global https.proxy 'https://127.0.0.1:1080'`
 
-如果用的 ssr 的话，
+if you uses SSR,
 
 `git config --global http.proxy 'socks5://127.0.0.1:1080'`
 
 `git config --global https.proxy 'socks5://127.0.0.1:1080'`
 
-## 解除
+## Disable
 
 `git config --global --unset http.proxy`
 
 `git config --global --unset https.proxy`
 
-# SSH 代理
+# SSH Proxy
 
-一开始在网上看到是 `ProxyCommand nc -v -x 127.0.0.1:1080 %h %p`, 但是这么配置了以后就提示没有nc这个指令，上网一查发现nc是Linux的一个用
-来做代理（？）的程序，于是乎只能另找。
-最后在[这里](https://walkedby.com/sshwindowsproxy/) 发现要用git目录里面的connect。
+At first i found this on google:`ProxyCommand nc -v -x 127.0.0.1:1080 %h %p`. 
+However, when I write it into my `.ssh/config`, there's and error saying cannot find command nc.
+So i searched the internet and found nc is available on Linux (and my pc is a Windows).
+For Windows i found [this](https://walkedby.com/sshwindowsproxy/).
+It says that we need to use the connect tool in the director where you install the git in.
 
-总而言之步骤如下：
+Anyway, here're the steps:
 
-1.  在 C:\users\username\.ssh下面建一个config文件。
+1.  Create a file named `config` under `C:\users\username\.ssh`.
 
-2.  在config里面写上一行：`ProxyCommand "C:\Program Files\Git\mingw64\bin\connect.exe" -S 127.0.0.1:1080 %h %p`
+2.  Write `ProxyCommand "C:\Program Files\Git\mingw64\bin\connect.exe" -S 127.0.0.1:1080 %h %p` in the `config`.
 
-3.  这时候再去拉repo的时候会发现他会让你输密码，如果你的socks代理没密码的话就直接回车。
-    但是这有个蛋疼的问题就是他每次都会让你输密码，而且在git bash里面还会提示密码错误，如果不想麻烦，就直接去环境变量里面是一个socks5的密码变量：
-    
+3.  At this time if you pull repos using `git pull` it will remind you to enter your password.
+    If you don't have any password for your socks proxy, just hit the return button.
+    If you don't want to enter your password everytime, then set a environment variable named `SOCKS5_PASSWORD`.
+    The value of the variable should be your socks password or anything if you don't have.
     ![socks5 password environment variable](/img/git-proxy/socks-password.png)
-    
-    如图，变量名就叫 `SOCKS5_PASSWD`，密码如果是空的话就随便填一个。
 
-4.  重启命令行，读入环境变量，然后找个比较大的repo（比图node的仓库`git clone git@github.com:nodejs/node.git`）测试一下, 完全ojbk。
+4.  Restart your cmd.exe, pull a large repo (like node.js `git clone git@github.com:nodejs/node.git`) to test the proxy.
+    OJBK.
     
 # P.S.
 
