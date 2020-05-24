@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "Windows 下给git配置代理"
+title:      "Set Git Proxy for Windows"
 subtitle:   ""
 date:       2020-04-10
 author:     "lwb"
